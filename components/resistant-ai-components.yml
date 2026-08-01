@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.resistant.ai/view-results/iframe/access-hosting.md, https://developers.resistant.ai/getting-started/quickstart-api.md
+type: Components
+components:
+- family: Offline iFrame viewer
+  kind: embeddable-iframe
+  description: A versioned client-side bundle that renders Resistant AI document-analysis results
+    inside an <iframe> in the customer's app. The viewer renders from data the host passes via
+    postMessage(); the bundle is asset-hosting only and contains no data by itself.
+  delivery_models:
+  - self-hosted (customer hosts the versioned bundle internally)
+  - resistant-ai-hosted static bundle URL (provided at enablement)
+  loader: '<iframe src="<OFFLINE_IFRAME_URL_PROVIDED_BY_RESISTANT_AI>" allow="clipboard-read; clipboard-write" referrerpolicy="no-referrer">'
+  integration: postMessage()
+  security_controls:
+  - serve over HTTPS
+  - Content-Security-Policy frame-ancestors / frame-src / child-src
+  - version pinning
+  docs: https://developers.resistant.ai/view-results/iframe/access-hosting
+  availability: provided by Resistant AI during enablement
+- family: Web UI (result deep-link)
+  kind: hosted-web-ui
+  description: Hosted web UI where an analysis result can be opened via a deep link keyed by submission_id.
+  docs: https://developers.resistant.ai/getting-started/quickstart-api
+note: The iFrame bundle URL is intentionally a placeholder in the docs and is provided per-tenant at
+  enablement; no public bundle URL is published.

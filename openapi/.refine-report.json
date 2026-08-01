@@ -1,0 +1,16 @@
+{
+  "provider": "resistant-ai",
+  "sources": [
+    "resistant-ai-submission-api-openapi.yml",
+    "resistant-ai-tenants-api-openapi.yml"
+  ],
+  "outputs": [
+    "resistant-ai-submission-api-openapi.yml",
+    "resistant-ai-tenants-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

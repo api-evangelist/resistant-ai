@@ -1,0 +1,134 @@
+# Documentation
+
+## Docs
+
+- [Add analysis feedback [ap-2]](https://developers.resistant.ai/api-reference/add-analysis-feedback-[ap-2].md): Add custom feedback for the document analysis result.
+- [Add analysis feedback [ap-3]](https://developers.resistant.ai/api-reference/add-analysis-feedback-[ap-3].md): Add custom feedback for the document analysis result.
+- [Add analysis feedback [ca-1]](https://developers.resistant.ai/api-reference/add-analysis-feedback-[ca-1].md): Add custom feedback for the document analysis result.
+- [Add analysis feedback [eu-1]](https://developers.resistant.ai/api-reference/add-analysis-feedback-[eu-1].md): Add custom feedback for the document analysis result.
+- [Add analysis feedback [testing]](https://developers.resistant.ai/api-reference/add-analysis-feedback-[testing].md): Add custom feedback for the document analysis result.
+- [Add analysis feedback [us-1]](https://developers.resistant.ai/api-reference/add-analysis-feedback-[us-1].md): Add custom feedback for the document analysis result.
+- [Add submission characteristics [ap-2]](https://developers.resistant.ai/api-reference/add-submission-characteristics-[ap-2].md): Attach submission characteristics to the submission. Submission characteristics are properties associated with the original document submission by the end user.
+- [Add submission characteristics [ap-3]](https://developers.resistant.ai/api-reference/add-submission-characteristics-[ap-3].md): Attach submission characteristics to the submission. Submission characteristics are properties associated with the original document submission by the end user.
+- [Add submission characteristics [ca-1]](https://developers.resistant.ai/api-reference/add-submission-characteristics-[ca-1].md): Attach submission characteristics to the submission. Submission characteristics are properties associated with the original document submission by the end user.
+- [Add submission characteristics [eu-1]](https://developers.resistant.ai/api-reference/add-submission-characteristics-[eu-1].md): Attach submission characteristics to the submission. Submission characteristics are properties associated with the original document submission by the end user.
+- [Add submission characteristics [testing]](https://developers.resistant.ai/api-reference/add-submission-characteristics-[testing].md): Attach submission characteristics to the submission. Submission characteristics are properties associated with the original document submission by the end user.
+- [Add submission characteristics [us-1]](https://developers.resistant.ai/api-reference/add-submission-characteristics-[us-1].md): Attach submission characteristics to the submission. Submission characteristics are properties associated with the original document submission by the end user.
+- [Create a submission [ap-2]](https://developers.resistant.ai/api-reference/create-a-submission-[ap-2].md): Create a new submission for a document to be analyzed
+- [Create a submission [ap-3]](https://developers.resistant.ai/api-reference/create-a-submission-[ap-3].md): Create a new submission for a document to be analyzed
+- [Create a submission [ca-1]](https://developers.resistant.ai/api-reference/create-a-submission-[ca-1].md): Create a new submission for a document to be analyzed
+- [Create a submission [eu-1]](https://developers.resistant.ai/api-reference/create-a-submission-[eu-1].md): Create a new submission for a document to be analyzed
+- [Create a submission [testing]](https://developers.resistant.ai/api-reference/create-a-submission-[testing].md): Create a new submission for a document to be analyzed
+- [Create a submission [us-1]](https://developers.resistant.ai/api-reference/create-a-submission-[us-1].md): Create a new submission for a document to be analyzed
+- [Create tenant](https://developers.resistant.ai/api-reference/create-tenant.md): Create tenant in the managed organization
+- [Create tenant application](https://developers.resistant.ai/api-reference/create-tenant-application.md): Creates application for a tenant
+- [Create token [ap-2]](https://developers.resistant.ai/api-reference/create-token-[ap-2].md): This endpoint returns access tokens, ID tokens, and refresh tokens depending on the request parameters. For [password](https://developer.okta.com/docs/guides/implement-grant-type/ropassword/main/), [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/), […
+- [Create token [ap-3]](https://developers.resistant.ai/api-reference/create-token-[ap-3].md): This endpoint returns access tokens, ID tokens, and refresh tokens depending on the request parameters. For [password](https://developer.okta.com/docs/guides/implement-grant-type/ropassword/main/), [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/), […
+- [Create token [ca-1]](https://developers.resistant.ai/api-reference/create-token-[ca-1].md): This endpoint returns access tokens, ID tokens, and refresh tokens depending on the request parameters. For [password](https://developer.okta.com/docs/guides/implement-grant-type/ropassword/main/), [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/), […
+- [Create token [eu-1]](https://developers.resistant.ai/api-reference/create-token-[eu-1].md): This endpoint returns access tokens, ID tokens, and refresh tokens depending on the request parameters. For [password](https://developer.okta.com/docs/guides/implement-grant-type/ropassword/main/), [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/), […
+- [Create token [testing]](https://developers.resistant.ai/api-reference/create-token-[testing].md): This endpoint returns access tokens, ID tokens, and refresh tokens depending on the request parameters. For [password](https://developer.okta.com/docs/guides/implement-grant-type/ropassword/main/), [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/), […
+- [Create token [us-1]](https://developers.resistant.ai/api-reference/create-token-[us-1].md): This endpoint returns access tokens, ID tokens, and refresh tokens depending on the request parameters. For [password](https://developer.okta.com/docs/guides/implement-grant-type/ropassword/main/), [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/), […
+- [Delete submission [ap-2]](https://developers.resistant.ai/api-reference/delete-submission-[ap-2].md): Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period.
+- [Delete submission [ap-3]](https://developers.resistant.ai/api-reference/delete-submission-[ap-3].md): Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period.
+- [Delete submission [ca-1]](https://developers.resistant.ai/api-reference/delete-submission-[ca-1].md): Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period.
+- [Delete submission [eu-1]](https://developers.resistant.ai/api-reference/delete-submission-[eu-1].md): Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period.
+- [Delete submission [testing]](https://developers.resistant.ai/api-reference/delete-submission-[testing].md): Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period.
+- [Delete submission [us-1]](https://developers.resistant.ai/api-reference/delete-submission-[us-1].md): Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period.
+- [Delete tenant](https://developers.resistant.ai/api-reference/delete-tenant.md): Delete organization Tenant
+- [Delete tenant application](https://developers.resistant.ai/api-reference/delete-tenant-application.md): Delete the application for the tenant
+- [Fetch Adaptive Decision result [ap-2]](https://developers.resistant.ai/api-reference/fetch-adaptive-decision-result-[ap-2].md): Fetch Adaptive Decision result
+- [Fetch Adaptive Decision result [ap-3]](https://developers.resistant.ai/api-reference/fetch-adaptive-decision-result-[ap-3].md): Fetch Adaptive Decision result
+- [Fetch Adaptive Decision result [ca-1]](https://developers.resistant.ai/api-reference/fetch-adaptive-decision-result-[ca-1].md): Fetch Adaptive Decision result
+- [Fetch Adaptive Decision result [eu-1]](https://developers.resistant.ai/api-reference/fetch-adaptive-decision-result-[eu-1].md): Fetch Adaptive Decision result
+- [Fetch Adaptive Decision result [testing]](https://developers.resistant.ai/api-reference/fetch-adaptive-decision-result-[testing].md): Fetch Adaptive Decision result
+- [Fetch Adaptive Decision result [us-1]](https://developers.resistant.ai/api-reference/fetch-adaptive-decision-result-[us-1].md): Fetch Adaptive Decision result
+- [Fetch content result [limited]](https://developers.resistant.ai/api-reference/fetch-content-result-[limited].md): Fetch content extraction result
+- [Fetch document classification [ap-2]](https://developers.resistant.ai/api-reference/fetch-document-classification-[ap-2].md): Fetch classification of the type of the submitted document
+- [Fetch document classification [ap-3]](https://developers.resistant.ai/api-reference/fetch-document-classification-[ap-3].md): Fetch classification of the type of the submitted document
+- [Fetch document classification [ca-1]](https://developers.resistant.ai/api-reference/fetch-document-classification-[ca-1].md): Fetch classification of the type of the submitted document
+- [Fetch document classification [eu-1]](https://developers.resistant.ai/api-reference/fetch-document-classification-[eu-1].md): Fetch classification of the type of the submitted document
+- [Fetch document classification [testing]](https://developers.resistant.ai/api-reference/fetch-document-classification-[testing].md): Fetch classification of the type of the submitted document
+- [Fetch document classification [us-1]](https://developers.resistant.ai/api-reference/fetch-document-classification-[us-1].md): Fetch classification of the type of the submitted document
+- [Fetch fraud result [ap-2]](https://developers.resistant.ai/api-reference/fetch-fraud-result-[ap-2].md): Fetch fraud analysis result
+- [Fetch fraud result [ap-3]](https://developers.resistant.ai/api-reference/fetch-fraud-result-[ap-3].md): Fetch fraud analysis result
+- [Fetch fraud result [ca-1]](https://developers.resistant.ai/api-reference/fetch-fraud-result-[ca-1].md): Fetch fraud analysis result
+- [Fetch fraud result [eu-1]](https://developers.resistant.ai/api-reference/fetch-fraud-result-[eu-1].md): Fetch fraud analysis result
+- [Fetch fraud result [testing]](https://developers.resistant.ai/api-reference/fetch-fraud-result-[testing].md): Fetch fraud analysis result
+- [Fetch fraud result [us-1]](https://developers.resistant.ai/api-reference/fetch-fraud-result-[us-1].md): Fetch fraud analysis result
+- [Fetch PDF report [ap-2]](https://developers.resistant.ai/api-reference/fetch-pdf-report-[ap-2].md): Fetch analysis PDF report of the submitted document
+- [Fetch PDF report [ap-3]](https://developers.resistant.ai/api-reference/fetch-pdf-report-[ap-3].md): Fetch analysis PDF report of the submitted document
+- [Fetch PDF report [ca-1]](https://developers.resistant.ai/api-reference/fetch-pdf-report-[ca-1].md): Fetch analysis PDF report of the submitted document
+- [Fetch PDF report [eu-1]](https://developers.resistant.ai/api-reference/fetch-pdf-report-[eu-1].md): Fetch analysis PDF report of the submitted document
+- [Fetch PDF report [testing]](https://developers.resistant.ai/api-reference/fetch-pdf-report-[testing].md): Fetch analysis PDF report of the submitted document
+- [Fetch PDF report [us-1]](https://developers.resistant.ai/api-reference/fetch-pdf-report-[us-1].md): Fetch analysis PDF report of the submitted document
+- [Fetch quality result [ap-2]](https://developers.resistant.ai/api-reference/fetch-quality-result-[ap-2].md)
+- [Fetch quality result [ap-3]](https://developers.resistant.ai/api-reference/fetch-quality-result-[ap-3].md)
+- [Fetch quality result [ca-1]](https://developers.resistant.ai/api-reference/fetch-quality-result-[ca-1].md)
+- [Fetch quality result [eu-1]](https://developers.resistant.ai/api-reference/fetch-quality-result-[eu-1].md)
+- [Fetch quality result [testing]](https://developers.resistant.ai/api-reference/fetch-quality-result-[testing].md)
+- [Fetch quality result [us-1]](https://developers.resistant.ai/api-reference/fetch-quality-result-[us-1].md)
+- [Fetch tenant](https://developers.resistant.ai/api-reference/fetch-tenant.md): Fetch tenant details
+- [Fetch tenant application](https://developers.resistant.ai/api-reference/fetch-tenant-application.md): Fetch the application for the tenant
+- [Get analysis feedback [ap-2]](https://developers.resistant.ai/api-reference/get-analysis-feedback-[ap-2].md): Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint.
+- [Get analysis feedback [ap-3]](https://developers.resistant.ai/api-reference/get-analysis-feedback-[ap-3].md): Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint.
+- [Get analysis feedback [ca-1]](https://developers.resistant.ai/api-reference/get-analysis-feedback-[ca-1].md): Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint.
+- [Get analysis feedback [eu-1]](https://developers.resistant.ai/api-reference/get-analysis-feedback-[eu-1].md): Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint.
+- [Get analysis feedback [testing]](https://developers.resistant.ai/api-reference/get-analysis-feedback-[testing].md): Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint.
+- [Get analysis feedback [us-1]](https://developers.resistant.ai/api-reference/get-analysis-feedback-[us-1].md): Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint.
+- [List tenant applications](https://developers.resistant.ai/api-reference/list-tenant-applications.md): List applications for a tenant
+- [List tenants](https://developers.resistant.ai/api-reference/list-tenants.md): List organization tenants
+- [About Resistant Documents](https://developers.resistant.ai/getting-started/about.md)
+- [Authentication](https://developers.resistant.ai/getting-started/authentication.md)
+- [Concepts](https://developers.resistant.ai/getting-started/concepts.md)
+- [Domains to allowlist](https://developers.resistant.ai/getting-started/domains-to-allowlist.md): Domains to allow for API calls, Web UI access, OAuth token retrieval, and file upload/download across Production and Testing.
+- [Getting an access token](https://developers.resistant.ai/getting-started/getting-access-token.md): How to obtain an OAuth 2.0 access token (client credentials) for the Resistant Documents API across stages and cells.
+- [Quickstart API](https://developers.resistant.ai/getting-started/quickstart-api.md)
+- [Adaptive Decision](https://developers.resistant.ai/integrate/adaptive-decision.md): Fetch a tenant-specific decision for a submission (optional).
+- [Core integration mechanics](https://developers.resistant.ai/integrate/core-integration.md)
+- [Optional API capabilities](https://developers.resistant.ai/integrate/optional-features.md): Optional endpoints and add-on capabilities you can enable per submission or configure at the tenant level.
+- [Downloadable PDF report](https://developers.resistant.ai/integrate/pdf-report.md)
+- [Document tags](https://developers.resistant.ai/optional-features/document-tags.md): How to interpret and use document_tags returned in the /fraud response (workflows, UI badges, analytics, and partners).
+- [Payload encryption](https://developers.resistant.ai/optional-features/payload-encryption.md): Optional end-to-end payload encryption for file uploads using JWE (RSA-OAEP-256 + AES-256-GCM), including key rotation with kid.
+- [Submission characteristics](https://developers.resistant.ai/optional-features/submission-characteristics.md): Optional metadata you can attach to a submission to improve monitoring, segmentation, and serial-fraud detection.
+- [Amazon SQS ](https://developers.resistant.ai/receiving-results/amazon-sqs.md)
+- [Overview](https://developers.resistant.ai/receiving-results/overview.md)
+- [Polling ](https://developers.resistant.ai/receiving-results/polling.md)
+- [Webhooks (Svix)](https://developers.resistant.ai/receiving-results/webhooks.md)
+- [Contact support](https://developers.resistant.ai/support/contact-support.md)
+- [Document intake best practices](https://developers.resistant.ai/support/document-intake-best-practices.md)
+- [Limits & quotas](https://developers.resistant.ai/support/limit-and-quotas.md)
+- [Supported formats](https://developers.resistant.ai/supported-formats.md)
+- [Overview](https://developers.resistant.ai/tenant-management-api-overview.md): Provision and manage isolated tenants and region-specific machine-to-machine applications under a single organization.
+- [API operations](https://developers.resistant.ai/tenant-management/api-operations.md)
+- [Authentication](https://developers.resistant.ai/tenant-management/authentication.md)
+- [FAQ and Troubleshooting](https://developers.resistant.ai/tenant-management/faq.md): Common questions and misunderstandings when integrating the Tenant Management API and using it with the Documents API.
+- [How to use Tenant Management in practice](https://developers.resistant.ai/tenant-management/how-to-use-tenant-management-in-practice.md): Recommended operating models for provisioning tenants and tenant applications: scripted automation vs an internal provisioning service.
+- [User Access](https://developers.resistant.ai/tenant-management/user-access.md): How user access is granted to tenants via SSO claims and role mapping in a multi-tenant organization.
+- [Access and hosting](https://developers.resistant.ai/view-results/iframe/access-hosting.md): How to obtain the Offline iFrame bundle and host it securely (self-hosted or Resistant AI–hosted static bundle).
+- [Overview](https://developers.resistant.ai/view-results/iframe/overview.md): A self-contained viewer for Resistant Documents results that runs inside your environment and renders from data you provide via postMessage.
+- [Quickstart](https://developers.resistant.ai/view-results/iframe/quickstart.md): Embed the Offline iFrame viewer and render results by sending the original file + API outputs via postMessage.
+- [Troubleshooting](https://developers.resistant.ai/view-results/iframe/troubleshooting.md)
+- [UI overview](https://developers.resistant.ai/view-results/overview.md): Choose the right UI option for viewing Resistant Documents results.
+- [Accessing the Web UI](https://developers.resistant.ai/view-results/web-ui/access.md): How to access the hosted Document Forensics Web UI, including URL formats, deep links, roles, and testing vs production.
+- [Authentication options](https://developers.resistant.ai/view-results/web-ui/authentication-options.md): How users authenticate to the hosted Web UI (Okta-managed vs Federated SSO).
+- [SSO setup with MS Entra ID (SAML)](https://developers.resistant.ai/view-results/web-ui/sso-entra-id.md): Step-by-step guide for configuring SAML 2.0 Single Sign-On (SSO) with Microsoft Entra ID for the Resistant Documents Web UI.
+- [SSO setup (OIDC)](https://developers.resistant.ai/view-results/web-ui/sso-oidc.md): Configure OpenID Connect (OIDC) Single Sign-On (SSO) for the Resistant Documents Web UI.
+- [SSO setup (SAML 2.0)](https://developers.resistant.ai/view-results/web-ui/sso-saml.md): Configure SAML 2.0 Single Sign-On (SSO) for the Resistant Documents Web UI.
+- [Using the Web UI](https://developers.resistant.ai/view-results/web-ui/using-web-ui.md): How analysts review verdicts, indicators, and evidence in the hosted Web UI.
+
+## OpenAPI Specs
+
+- [spec-us-1](https://developers.resistant.ai/spec-us-1.json)
+- [spec-testing](https://developers.resistant.ai/spec-testing.json)
+- [spec-eu-1](https://developers.resistant.ai/spec-eu-1.json)
+- [spec-ca-1](https://developers.resistant.ai/spec-ca-1.json)
+- [spec-ap-3](https://developers.resistant.ai/spec-ap-3.json)
+- [spec-ap-2](https://developers.resistant.ai/spec-ap-2.json)
+- [tm_openapi](https://developers.resistant.ai/tm_openapi.json)
+- [openapi](https://developers.resistant.ai/openapi.json)
+- [bla](https://developers.resistant.ai/bla.json)
+
+## Optional
+
+- [Status page ](https://resistantai.statuspage.io/)
+- [Trust center](https://trust.resistant.ai/)

@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/resistant-ai-documents-openapi.json, openapi/resistant-ai-tenant-management-openapi.json, https://trust.resistant.ai
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OpenAPI securitySchemes declares oauth2 clientCredentials flow with submissions.read / submissions.write scopes.
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: Token endpoint https://eu.id.resistant.ai/oauth2/.../v1/token; docs describe Basic-auth client credentials exchange.
+- id: oidc-discovery
+  conforms: true
+  evidence: Identity host publishes /.well-known/openid-configuration (Okta-hosted issuer eu.id.resistant.ai), status 200.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses use a plain application/json { message } envelope, not application/problem+json.
+- id: openapi-3
+  conforms: true
+  evidence: Two published OpenAPI 3.0.x specifications (Documents API 2.0.0b, Tenant Management 0.0.1).
+- id: rfc8594-sunset
+  conforms: false
+  evidence: No Sunset/Deprecation header policy documented.
+- id: webhooks-svix
+  conforms: true
+  evidence: Webhook delivery via Svix with webhook-id/webhook-timestamp/webhook-signature signature verification.
+compliance_note: >-
+  Resistant AI operates a public Trust Center at https://trust.resistant.ai/. The page renders its
+  certification list client-side and could not be captured verbatim by an unauthenticated probe, so
+  specific certifications are not asserted here to avoid fabrication. See security/resistant-ai-trust-center.yml.

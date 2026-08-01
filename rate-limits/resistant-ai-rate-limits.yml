@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.resistant.ai/support/limit-and-quotas.md
+type: RateLimits
+scope: per-tenant
+enforcement: >-
+  Rate limits apply per tenant and are enforced separately for create-submission requests and
+  all other requests. Exceeding a quota returns HTTP 429; clients must back off with exponential
+  backoff + jitter and reuse access tokens (do not request a token per call).
+over_limit_status: 429
+tiers:
+- tier: Default
+  limits:
+  - operation_group: create_submission
+    endpoint: POST /v2/submission
+    limit_count: 4
+    unit: requests_per_second
+    burst: 6
+  - operation_group: other_requests
+    endpoint: other (polling result endpoints, delete, etc.)
+    limit_count: 10
+    unit: requests_per_second
+    burst: 15
+notes:
+- Some limits may vary by contract, tenant configuration, or deployment cell.
+- Hard analysis timeout is 15 minutes; recommended polling interval capped at 45 seconds.
+- Default result retention is 90 days (contract-dependent); DELETE /v2/submission/{submission_id}
+  for earlier deletion.
+higher_tier: contact Resistant AI representative

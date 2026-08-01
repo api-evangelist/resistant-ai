@@ -1,0 +1,35 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of Resistant AI API + developer + identity hosts
+hosts:
+- host: https://api.documents.resistant.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+- host: https://eu.id.resistant.ai
+  note: OAuth2 token issuer (Okta-hosted identity) for the Documents API client-credentials flow
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: resistant-ai-openid-configuration.json
+- host: https://resistant.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://developers.resistant.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 200
+    file: ../llms/resistant-ai-llms.txt
+  - path: /openapi.json
+    status: 200
+    file: ../openapi/resistant-ai-documents-openapi.json
+  - path: /tm_openapi.json
+    status: 200
+    file: ../openapi/resistant-ai-tenant-management-openapi.json

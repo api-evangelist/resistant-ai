@@ -1,8 +1,26 @@
 aid: resistant-ai
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/resistant-ai.png
 name: Resistant AI
-description: 'Resistant AI is a company surfaced as a portfolio company of gv, index-ventures, seedcamp
-  and added to the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  Resistant AI protects financial-services organizations from fraud and financial crime with AI.
+  Its Documents product detects fake, tampered, forged, and AI-generated documents (PDFs and images)
+  in seconds, and its Transactions product layers 80+ AI models over existing transaction-monitoring
+  systems for AML and fraud detection. The Resistant Documents API provides programmatic document
+  forensics — fraud, quality, classification, content extraction, and Adaptive Decision — through an
+  OAuth2 create/upload/poll workflow across regional cells, with polling, Amazon SQS, and Svix webhook
+  result delivery, plus a Tenant Management API for provisioning tenants and applications.
 url: https://raw.githubusercontent.com/api-evangelist/resistant-ai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,20 +28,107 @@ x-backed-by:
 - gv
 - index-ventures
 - seedcamp
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: has-public-api
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Ai
-apis: []
+- Fraud Detection
+- Financial Crime
+- Document Verification
+- Document Forensics
+- AML
+- Identity Verification
+- Fintech
+- Machine Learning
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: resistant-ai:resistant-ai-submission-api
+  name: Resistant AI Submission API
+  description: The Submission API from Resistant AI — 10 operation(s) for submission.
+  humanURL: https://developers.resistant.ai
+  baseURL: https://api.documents.resistant.ai
+  tags:
+  - Submission
+  properties:
+  - type: OpenAPI
+    url: openapi/resistant-ai-submission-api-openapi.yml
+- aid: resistant-ai:resistant-ai-tenants-api
+  name: Resistant AI Tenants API
+  description: The Tenants API from Resistant AI — 4 operation(s) for tenants.
+  humanURL: https://developers.resistant.ai
+  baseURL: https://api.documents.resistant.ai
+  tags:
+  - Tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/resistant-ai-tenants-api-openapi.yml
 common:
 - type: Website
-  url: http://resistant.ai
+  url: https://resistant.ai
+- type: DeveloperPortal
+  url: https://developers.resistant.ai
+- type: Documentation
+  url: https://developers.resistant.ai
+- type: APIReference
+  url: https://developers.resistant.ai/api-reference
+- type: GettingStarted
+  url: https://developers.resistant.ai/getting-started/about
+- type: Quickstart
+  url: https://developers.resistant.ai/getting-started/quickstart-api
+- type: Support
+  url: https://developers.resistant.ai/support/contact-support
+- type: Blog
+  url: https://resistant.ai/blog
+- type: PrivacyPolicy
+  url: https://resistant.ai/privacy-policy
+- type: StatusPage
+  url: https://resistantai.statuspage.io/
+- type: TrustCenter
+  url: https://trust.resistant.ai/
+- type: Authentication
+  url: authentication/resistant-ai-authentication.yml
+- type: OAuthScopes
+  url: scopes/resistant-ai-scopes.yml
+- type: Conventions
+  url: conventions/resistant-ai-conventions.yml
+- type: ErrorCatalog
+  url: errors/resistant-ai-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/resistant-ai-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/resistant-ai-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/resistant-ai-documents-webhooks.yml
+- type: Conformance
+  url: conformance/resistant-ai-conformance.yml
+- type: Sandbox
+  url: sandbox/resistant-ai-sandbox.yml
+- type: Components
+  url: components/resistant-ai-components.yml
+- type: DataModel
+  url: data-model/resistant-ai-data-model.yml
+- type: MCPServer
+  url: mcp/resistant-ai-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/resistant-ai-agentic-access.yml
+- type: WellKnown
+  url: well-known/resistant-ai-well-known.yml
+- type: LLMsTxt
+  url: llms/resistant-ai-llms.txt
+- type: DomainSecurity
+  url: security/resistant-ai-domain-security.yml

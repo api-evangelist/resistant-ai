@@ -1,0 +1,61 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/resistant-ai-documents-openapi.json, openapi/resistant-ai-tenant-management-openapi.json
+format: json
+envelope:
+  content_type: application/json
+  schema: '#/components/schemas/Error'
+  fields:
+  - name: message
+    type: string
+    description: Detailed error message (0-512 chars)
+note: >-
+  Error responses use a simple application/json envelope with a single `message` field
+  (components.schemas.Error). Responses are NOT RFC 9457 application/problem+json. 401/403/415/429
+  responses carry no body schema in the spec. HTTP semantics below are derived from the OpenAPI
+  response descriptions and the published limits/polling docs.
+problems:
+- status: 400
+  title: Bad request
+  meaning: Invalid request. E.g. a result endpoint was called for a feature that was not
+    enabled at submission time (enable_decision / enable_submission_characteristics must be true),
+    or the request body/parameters were malformed.
+  remediation: Verify the submission was created with the required feature flags and the request
+    body matches the schema.
+  source_operations:
+  - openapi/resistant-ai-documents-openapi.json#createSubmission
+  - openapi/resistant-ai-documents-openapi.json#getDecision
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid OAuth2 access token.
+  remediation: 'Obtain a token via the client-credentials flow and send it as the Authorization Bearer header.'
+- status: 403
+  title: Forbidden
+  meaning: The token lacks the required scope (submissions.read / submissions.write) or the caller
+    is not permitted for the tenant/cell.
+  remediation: Request the correct scope and confirm you are calling the base URL for your tenant's cell.
+- status: 404
+  title: Not found
+  meaning: Submission does not exist, or the verdict is not ready yet. During polling, 404 means
+    "result not ready — retry with backoff".
+  remediation: For polling, retry with exponential backoff (cap 45s, stop after 15 min hard timeout).
+  source_operations:
+  - openapi/resistant-ai-documents-openapi.json#getFraud
+- status: 409
+  title: Conflict
+  meaning: The report cannot be downloaded because the fraud analysis or adaptive decision did not
+    complete successfully or was skipped.
+  remediation: Confirm the underlying analysis reached a successful terminal status before requesting
+    the report.
+  source_operations:
+  - openapi/resistant-ai-documents-openapi.json#getReport
+  - openapi/resistant-ai-documents-openapi.json#deleteSubmission
+- status: 415
+  title: Unsupported media type
+  meaning: The request Content-Type is not accepted for this operation.
+  remediation: Use application/json for submission bodies and application/octet-stream for file uploads.
+- status: 429
+  title: Too many requests
+  meaning: Per-tenant rate limit exceeded (create-submission 4 req/s / 6 burst; other 10 req/s / 15 burst, Default tier).
+  remediation: Back off with exponential backoff + jitter, avoid synchronized retries, and reuse access tokens.
+  cross_ref: rate-limits/resistant-ai-rate-limits.yml

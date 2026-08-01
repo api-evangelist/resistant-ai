@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/resistant-ai-documents-openapi.json (servers enum), https://developers.resistant.ai/spec-testing.json, https://developers.resistant.ai/getting-started/authentication.md
+type: Sandbox
+test_vs_live:
+  model: separate testing STAGE (vs production), plus regional production cells
+  testing_host: https://api.documents.testing.resistant.ai
+  testing_spec: https://developers.resistant.ai/spec-testing.json
+  production_hosts:
+  - https://api.documents.resistant.ai
+  - https://api.us-1.documents.resistant.ai
+  - https://api.ca-1.documents.resistant.ai
+  - https://api.ap-2.documents.resistant.ai
+  - https://api.ap-3.documents.resistant.ai
+  note: The OpenAPI servers enum exposes api.documents.testing as the testing environment. Keep the
+    base URL and OAuth2 token URL aligned to the same stage/cell.
+credentials:
+  model: OAuth2 client credentials (Client ID + Client Secret) provisioned per tenant by Resistant AI.
+  note: No self-serve/public test credentials are published; sandbox access is provisioned during onboarding.
+test_data:
+  published_test_values: none
+  note: Resistant AI publishes no magic/synthetic test document values. Testing uses real sample
+    PDFs/images against the testing stage. Do not fabricate test identifiers.
+webhook_testing:
+  note: During onboarding a test webhook event can be requested to validate Svix delivery and signature verification.

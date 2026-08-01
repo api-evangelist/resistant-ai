@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/resistant-ai-documents-openapi.json, openapi/resistant-ai-tenant-management-openapi.json
+entities:
+- name: Submission
+  api: Documents
+  id: submission_id
+  client_ref: query_id
+  description: A single document submitted for analysis. Created via POST /v2/submission, then the
+    file bytes are uploaded to a returned presigned upload_url. Carries the analysis results.
+  results:
+  - fraud (GET /v2/submission/{submission_id}/fraud)
+  - quality (GET /v2/submission/{submission_id}/quality)
+  - classification (GET /v2/submission/{submission_id}/classification)
+  - decision (Adaptive Decision, GET /v2/submission/{submission_id}/decision)
+  - content (GET /v2/submission/{submission_id}/content)
+  - report (GET /v2/submission/{submission_id}/report)
+  - feedback (GET/PUT /v2/submission/{submission_id}/feedback)
+  - characteristics (PUT /v2/submission/{submission_id}/characteristics)
+- name: Tenant
+  api: TenantManagement
+  id: tenant_id
+  description: An organization/customer boundary. Rate limits, event destinations and retention are scoped per tenant.
+- name: Application
+  api: TenantManagement
+  id: application_id
+  description: An application/credential holder that belongs to a tenant and calls the Documents API.
+relationships:
+- from: Application
+  to: Tenant
+  type: belongs_to
+  via: tenant_id
+- from: Tenant
+  to: Application
+  type: has_many
+  via: tenant_id
+- from: Submission
+  to: Tenant
+  type: belongs_to
+  via: tenant_id
+  note: tenant_id scopes submissions (appears in the webhook/event envelope) though it is not a request field.
+notes:
+- Result resources (fraud/quality/classification/decision/content/report/feedback/characteristics)
+  are sub-resources of a Submission addressed by submission_id, not independent entities.
+- No cross-entity numeric id-prefix scheme is documented; ids are opaque strings.

@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Resistant Documents API
+  version: 1.0.0
+extends: openapi/resistant-ai-documents-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-20'
+    x-apievangelist-provider: resistant-ai
+    x-apievangelist-artifacts:
+      authentication: authentication/resistant-ai-authentication.yml
+      scopes: scopes/resistant-ai-scopes.yml
+      conventions: conventions/resistant-ai-conventions.yml
+      errors: errors/resistant-ai-problem-types.yml
+      rate_limits: rate-limits/resistant-ai-rate-limits.yml
+      webhooks: asyncapi/resistant-ai-documents-webhooks.yml
+      lifecycle: lifecycle/resistant-ai-lifecycle.yml
+      sandbox: sandbox/resistant-ai-sandbox.yml
+- target: $.info
+  update:
+    x-agentic-access: agentic-access/resistant-ai-agentic-access.yml
+    x-async-delivery: [polling, amazon-sqs, webhooks-svix]

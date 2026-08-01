@@ -1,0 +1,47 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.resistant.ai/getting-started/quickstart-api.md, /getting-started/authentication.md, /receiving-results/overview.md, /support/limit-and-quotas.md, openapi/
+authentication:
+  style: oauth2-client-credentials
+  header: 'Authorization: Bearer <access_token>'
+  token_exchange: HTTP Basic (client_id:client_secret base64) POST to the cell token URL
+  scopes: [submissions.read, submissions.write]
+  cross_ref: authentication/resistant-ai-authentication.yml
+base_url:
+  pattern: https://{environment}.resistant.ai
+  environments: [api.documents, api.us-1.documents, api.ca-1.documents, api.ap-2.documents, api.ap-3.documents, api.documents.testing]
+  note: Keep base URL and token URL aligned to the same stage/cell.
+async_workflow:
+  model: three-phase (create submission -> upload file bytes to presigned upload_url -> retrieve results)
+  result_delivery: [polling (default), amazon-sqs (add-on), webhooks-svix (add-on)]
+  cross_ref: asyncapi/resistant-ai-documents-webhooks.yml
+polling:
+  strategy: exponential backoff
+  interval_cap_seconds: 45
+  hard_timeout_minutes: 15
+  not_ready_signal: HTTP 404 on a result endpoint means "not ready yet — retry with backoff"
+idempotency:
+  api_idempotency_key: false
+  note: The Documents/Tenant APIs expose no request idempotency-key. Consumers reuse a stable
+    query_id and can DELETE+resubmit. Webhook receivers are expected to be idempotent (at-least-once
+    delivery) and deduplicate on webhook-id or (submission_id, event_type, version).
+pagination:
+  style: none-documented
+  note: Result and tenant/application list endpoints are id-addressed; no cursor/offset pagination is documented.
+request_tracing:
+  client_correlation: query_id (user-defined, must not contain PII) echoed through results
+  submission_identifier: submission_id
+error_envelope:
+  content_type: application/json
+  shape: '{ message: string }'
+  rfc9457: false
+  cross_ref: errors/resistant-ai-problem-types.yml
+rate_limit_signaling:
+  over_limit_status: 429
+  guidance: exponential backoff + jitter; reuse access tokens; avoid synchronized retries
+  cross_ref: rate-limits/resistant-ai-rate-limits.yml
+versioning:
+  scheme: uri-path (v2 Documents, v0 Tenant Management)
+  cross_ref: lifecycle/resistant-ai-lifecycle.yml
+data_privacy:
+  pii_guidance: query_id must be an opaque internal ID with no PII; retention default 90 days.

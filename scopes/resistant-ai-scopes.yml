@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/resistant-ai-documents-openapi.json
+docs: https://developers.resistant.ai/getting-started/authentication
+schemes:
+- name: OAuth2
+  source: openapi/resistant-ai-documents-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token
+scopes:
+- scope: submissions.read
+  description: Read analysis results for a submission
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/resistant-ai-documents-openapi.json
+- scope: submissions.write
+  description: Create a new submission
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/resistant-ai-documents-openapi.json

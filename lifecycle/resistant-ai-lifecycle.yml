@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.resistant.ai, https://resistantai.statuspage.io, openapi/resistant-ai-documents-openapi.json
+versioning:
+  scheme: uri-path
+  current: v2
+  documents_api: v2 (/v2/submission)
+  tenant_management_api: v0 (/v0/tenants)
+  notes: Version carried in the URL path; multiple regional cells (eu-1/us-1/ca-1/ap-2/ap-3) and a
+    dedicated testing stage share the same versioned path scheme.
+status_page: https://resistantai.statuspage.io/
+retention:
+  default_days: 90
+  contract_dependent: true
+  early_deletion: DELETE /v2/submission/{submission_id}
+timeouts:
+  hard_analysis_timeout_minutes: 15
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal, published deprecation/sunset-header policy was found. The API version 2.0.0b
+    is marked beta by its version string; the v2 spec is the current production surface.
+deprecated_operations: []

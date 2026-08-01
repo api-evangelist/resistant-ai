@@ -1,0 +1,14 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Resistant Documents Tenant Management API
+  version: 1.0.0
+extends: openapi/resistant-ai-tenant-management-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-20'
+    x-apievangelist-provider: resistant-ai
+    x-apievangelist-artifacts:
+      authentication: authentication/resistant-ai-authentication.yml
+      data_model: data-model/resistant-ai-data-model.yml
+      agentic_access: agentic-access/resistant-ai-agentic-access.yml

@@ -1,0 +1,1083 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Resistant Documents organization Tenants API - prod",
+    "version": "0.0.1",
+    "description": "\nResistant Documents provides this API to programmatically interact with its organization tenant management.\nInteraction with the API can be divided into three phases:\n\n1. organization access provisioning and its configuration. This is managed by the Resistant AI team and credentials for API access are provided.\n2. Managing tenants within organization - creation, deletion and listing.\n3. Configuration of an api access for provisioned tenant."
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.resistant.ai/v0",
+      "description": "Tenant Management API",
+      "variables": {
+        "environment": {
+          "default": "api.tenants",
+          "enum": [
+            "api.tenants",
+            "api.tenants.testing"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/tenants": {
+      "post": {
+        "summary": "Create tenant",
+        "description": "Create tenant in the managed organization",
+        "operationId": "createTenant",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.write"
+            ]
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TenantCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tenant created successfully.",
+            "headers": {
+              "Location": {
+                "description": "URL of the created tenant",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      },
+      "get": {
+        "summary": "List tenants",
+        "description": "List organization tenants",
+        "operationId": "getTenants",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "in": "query",
+            "name": "after_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}": {
+      "get": {
+        "summary": "Fetch tenant",
+        "operationId": "getTenant",
+        "description": "Fetch tenant details",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asynchronous processing finished (either with a success or an error). Result of the processing is described by the specific response object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete tenant",
+        "operationId": "deleteTenant",
+        "description": "Delete organization Tenant",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tenant successfully deleted."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}/applications": {
+      "get": {
+        "summary": "List tenant applications",
+        "description": "List applications for a tenant",
+        "operationId": "getTenantApplications",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.applications.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applications provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantApplicationListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create tenant application",
+        "description": "Creates application for a tenant",
+        "operationId": "createTenantApplication",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.applications.write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TenantApplicationCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tenant application created",
+            "headers": {
+              "Location": {
+                "description": "URL of the created tenant application",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantApplicationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}/applications/{application_id}": {
+      "get": {
+        "summary": "Fetch tenant application",
+        "description": "Fetch the application for the tenant",
+        "operationId": "getTenantApplication",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.applications.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aplications provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantApplicationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete tenant application",
+        "description": "Delete the application for the tenant",
+        "operationId": "deleteTenantApplication",
+        "security": [
+          {
+            "OAuth2": [
+              "tenants.applications.write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Aplications deleted"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "title": "Error",
+        "type": "object",
+        "properties": {
+          "message": {
+            "title": "Error message",
+            "description": "Detailed error message",
+            "minLength": 0,
+            "maxLength": 512,
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "Authentication": {
+        "title": "Authentication",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "RSA": "#/components/schemas/RSAAuthentication",
+            "EC": "#/components/schemas/ECAuthentication",
+            "CLIENT_SECRET": "#/components/schemas/ClientSecretAuthentication"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RSAAuthentication"
+          },
+          {
+            "$ref": "#/components/schemas/ECAuthentication"
+          },
+          {
+            "$ref": "#/components/schemas/ClientSecretAuthentication"
+          }
+        ]
+      },
+      "RSAAuthentication": {
+        "title": "RSAAuthentication",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "alg": {
+            "title": "Alg",
+            "type": "string",
+            "description": "Signing algorithm",
+            "enum": [
+              "RS256"
+            ]
+          },
+          "kid": {
+            "title": "Kid",
+            "type": "string",
+            "description": "The unique identifier of the key."
+          },
+          "e": {
+            "title": "e",
+            "type": "integer",
+            "description": "The key exponent of a RSA key.",
+            "enum": [
+              65537
+            ]
+          },
+          "n": {
+            "title": "n",
+            "type": "integer",
+            "description": "The modulus of the RSA key. Key size needs to be bigger then 2048 bits"
+          }
+        },
+        "required": [
+          "type",
+          "alg",
+          "kid",
+          "e",
+          "n"
+        ]
+      },
+      "ECAuthentication": {
+        "title": "ECAuthentication",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "alg": {
+            "title": "Alg",
+            "type": "string",
+            "description": "Signing algorithm",
+            "enum": [
+              "ES256"
+            ]
+          },
+          "kid": {
+            "title": "Kid",
+            "type": "string",
+            "description": "The unique identifier of the key."
+          },
+          "x": {
+            "title": "x",
+            "type": "integer",
+            "description": "The public x coordinate for the elliptic curve point."
+          },
+          "y": {
+            "title": "y",
+            "type": "integer",
+            "description": "The public y coordinate for the elliptic curve point."
+          }
+        },
+        "required": [
+          "type",
+          "alg",
+          "kid",
+          "x",
+          "y"
+        ]
+      },
+      "ClientSecretAuthentication": {
+        "title": "ClientSecretAuthentication",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "Credentials": {
+        "title": "Credentials",
+        "description": "Credentials are returned only once for newly created applications",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "RSA": "#/components/schemas/RSACredentials",
+            "EC": "#/components/schemas/ECCredentials",
+            "CLIENT_SECRET": "#/components/schemas/ClientSecretCredentials"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RSACredentials"
+          },
+          {
+            "$ref": "#/components/schemas/ECCredentials"
+          },
+          {
+            "$ref": "#/components/schemas/ClientSecretCredentials"
+          }
+        ]
+      },
+      "RSACredentials": {
+        "title": "RSACredentials",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "alg": {
+            "title": "Alg",
+            "type": "string",
+            "description": "Signing algorithm",
+            "enum": [
+              "RS256"
+            ]
+          },
+          "kid": {
+            "title": "Kid",
+            "type": "string",
+            "description": "The unique identifier of the key."
+          }
+        },
+        "required": [
+          "type",
+          "alg",
+          "kid"
+        ]
+      },
+      "ECCredentials": {
+        "title": "ECCredentials",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "alg": {
+            "title": "Alg",
+            "type": "string",
+            "description": "Signing algorithm",
+            "enum": [
+              "ES256"
+            ]
+          },
+          "kid": {
+            "title": "Kid",
+            "type": "string",
+            "description": "The unique identifier of the key."
+          }
+        },
+        "required": [
+          "type",
+          "alg",
+          "kid"
+        ]
+      },
+      "ClientSecretCredentials": {
+        "title": "ClientSecretCredentials",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string",
+            "description": "Client credentials secret"
+          }
+        },
+        "required": [
+          "type",
+          "client_secret"
+        ]
+      },
+      "OrganizationBasicInfo": {
+        "title": "OrganizationBasicInfo",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "TenantResponse": {
+        "title": "TenantResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "created": {
+            "title": "Created",
+            "type": "string"
+          },
+          "updated": {
+            "title": "Updated",
+            "type": "string"
+          },
+          "cells": {
+            "title": "Cells",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CellName"
+            }
+          },
+          "_links": {
+            "properties": {
+              "documents-ui": {
+                "type": "object",
+                "additionalProperties": true,
+                "example": [
+                  {
+                    "href": "name-org-name.documents.resistant.ai",
+                    "rel": "eu-1"
+                  },
+                  {
+                    "href": "name-org-name.us-1.documents.resistant.ai",
+                    "rel": "us-1"
+                  },
+                  {
+                    "href": "name-org-name.ap-2.documents.resistant.ai",
+                    "rel": "ap-2"
+                  },
+                  {
+                    "href": "name-org-name.ap-3.documents.resistant.ai",
+                    "rel": "ap-3"
+                  },
+                  {
+                    "href": "name-org-name.ca-1.documents.resistant.ai",
+                    "rel": "ca-1"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created",
+          "updated",
+          "cells"
+        ]
+      },
+      "CellName": {
+        "title": "CellName",
+        "description": "An enumeration.",
+        "enum": [
+          "eu-1",
+          "us-1",
+          "ap-2",
+          "ap-3",
+          "ca-1"
+        ],
+        "type": "string"
+      },
+      "TenantCreateRequest": {
+        "title": "TenantCreateRequest",
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "description": "Desired name of the tenant. Must be unique within the organization and contain only lowercase letters (a-z) and digits (0-9).",
+            "minLength": 1,
+            "maxLength": 61,
+            "pattern": "^[a-z0-9]{1,61}$"
+          },
+          "cells": {
+            "default": [
+              "eu-1"
+            ],
+            "description": "List of cells where the UI should be accessible",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CellName"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "TenantPageResponse": {
+        "title": "TenantPageResponse",
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TenantResponse"
+            }
+          },
+          "_links": {
+            "title": "Links",
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "next": {
+                "href": "/tenants?limit={limit}&after_id={after_id}"
+              }
+            }
+          }
+        },
+        "required": [
+          "items",
+          "_links"
+        ]
+      },
+      "OAuth2ClientSecret": {
+        "title": "OAuth2ClientSecret",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          }
+        },
+        "required": [
+          "client_id"
+        ]
+      },
+      "OAuth2ClientKeyPair": {
+        "title": "OAuth2ClientKeyPair",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Authentication"
+            }
+          }
+        },
+        "required": [
+          "client_id"
+        ]
+      },
+      "TenantApplicationResponse": {
+        "title": "TenantApplicationResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "auth_server": {
+            "title": "Auth_server",
+            "type": "string",
+            "description": "Auth server url"
+          },
+          "cell": {
+            "$ref": "#/components/schemas/CellName"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentsScope"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/Credentials"
+          },
+          "_links": {
+            "title": "Links",
+            "type": "object",
+            "properties": {
+              "token_url": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "cell",
+          "scopes",
+          "client_id",
+          "auth_server"
+        ]
+      },
+      "TenantApplicationListResponse": {
+        "title": "TenantApplicationListResponse",
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TenantApplicationResponse"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "DocumentsScope": {
+        "title": "DocumentsScope",
+        "description": "An enumeration.",
+        "enum": [
+          "documents.submissions.read",
+          "documents.submissions.write"
+        ],
+        "type": "string"
+      },
+      "TenantApplicationCreateRequest": {
+        "title": "TenantApplicationCreateRequest",
+        "type": "object",
+        "properties": {
+          "cell": {
+            "$ref": "#/components/schemas/CellName"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentsScope"
+            }
+          },
+          "auth_method": {
+            "$ref": "#/components/schemas/Authentication"
+          }
+        },
+        "required": [
+          "cell",
+          "scopes",
+          "auth_method"
+        ]
+      }
+    },
+    "responses": {
+      "UnsupportedMediaType": {
+        "description": "Unsupported media type.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The requested resource was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing valid authentication credentials.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Access to the requested resource is forbidden.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Request quota was exceeded"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "description": "[JWT with private key](https://developer.okta.com/docs/api/openapi/okta-oauth/guides/client-auth/#jwt-with-private-key).\n[Java example](https://developer.okta.com/docs/guides/build-self-signed-jwt/java/main/#build-a-jwt-with-a-private-key)\n Please note that Token URL is specific for a given environment. Correct URL is in the corresponding environment documentation.\n",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://eu.id.resistant.ai/oauth2/aus17c172cLOCWEyk417/v1/token",
+            "scopes": {
+              "tenants.read": "Read tenant configurations within the organization",
+              "tenants.write": "Manage and configure tenants within the organization",
+              "tenants.applications.read": "Read tenant applications",
+              "tenants.applications.write": "Manage tenant applications",
+              "organization.read": "Read organization configuration"
+            }
+          }
+        }
+      }
+    }
+  }
+}

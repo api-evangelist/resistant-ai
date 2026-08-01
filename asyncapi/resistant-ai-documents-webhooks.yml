@@ -1,0 +1,66 @@
+generated: '2026-07-20'
+method: searched
+source: https://developers.resistant.ai/receiving-results/webhooks.md, https://developers.resistant.ai/receiving-results/overview.md
+type: Webhooks
+summary: >-
+  Resistant Documents delivers asynchronous analysis-completion events via two optional
+  add-on channels (subject to prior agreement, may involve an additional fee): Svix-delivered
+  HTTPS webhooks and Amazon SQS event notifications. Polling the result endpoints is the
+  default. Events are notifications only — the consumer fetches the authoritative result
+  from the Documents API using the submission_id / result_url.
+delivery:
+  default: polling
+  channels:
+  - name: webhooks
+    provider: Svix
+    transport: https-post
+    docs: https://developers.resistant.ai/receiving-results/webhooks
+    signature_headers:
+    - webhook-id
+    - webhook-timestamp
+    - webhook-signature
+    delivery_semantics: at-least-once
+    retries: exponential-backoff
+    availability: optional add-on (prior agreement; may involve additional fee)
+  - name: amazon-sqs
+    provider: Amazon SQS
+    transport: sqs
+    docs: https://developers.resistant.ai/receiving-results/amazon-sqs
+    auth: Resistant AI assumes an STS role in the customer AWS account; tenant_id used as ExternalId
+    limitation: one event destination per tenant
+    availability: optional add-on (prior agreement; may involve additional fee)
+event_envelope:
+  fields:
+  - type
+  - version
+  - tenant_id
+  - payload
+events:
+- type: documents.adaptive_decision.finished
+  channels: [webhooks, amazon-sqs]
+  fetch_result: GET /v2/submission/{submission_id}/decision
+- type: documents.analysis.fraud.finished
+  channels: [amazon-sqs, webhooks]
+  fetch_result: GET /v2/submission/{submission_id}/fraud
+- type: documents.analysis.quality.finished
+  channels: [amazon-sqs, webhooks]
+  fetch_result: GET /v2/submission/{submission_id}/quality
+- type: documents.analysis.classification.finished
+  channels: [amazon-sqs, webhooks]
+  fetch_result: GET /v2/submission/{submission_id}/classification
+notes:
+- Webhooks currently notify Adaptive Decision (/decision) completion; fraud/quality/classification
+  notifications are delivered via SQS (or polling).
+- The overview page lists additional fraud/quality/classification webhook event types; treat the
+  webhooks page as authoritative for the currently-delivered webhook set.
+- No published AsyncAPI document was found; this is a derived webhook/event catalog (type Webhooks).
+example_payload:
+  type: documents.adaptive_decision.finished
+  version: 0
+  tenant_id: string
+  payload:
+    id: submission_id
+    status: SUCCESS
+    analysis_time: string
+    query_id: string
+    result_url: /v2/submission/submission_id/decision

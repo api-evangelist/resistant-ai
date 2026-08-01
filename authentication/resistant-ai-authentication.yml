@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/resistant-ai-documents-openapi.json
+docs: https://developers.resistant.ai/getting-started/authentication
+notes:
+- 'OAuth2 client-credentials. Token obtained by POSTing HTTP Basic (client_id:client_secret) to the
+  cell token URL with grant_type=client_credentials. Access token sent as the Authorization Bearer header.'
+- Identity issuer eu.id.resistant.ai (Okta-hosted) publishes /.well-known/openid-configuration.
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token
+    scopes: 2
+  sources:
+  - openapi/resistant-ai-documents-openapi.json

@@ -1,0 +1,13 @@
+generated: '2026-07-20'
+method: searched
+probe: false
+type: TrustCenter
+url: https://trust.resistant.ai/
+source: https://resistant.ai (homepage link), https://trust.resistant.ai/
+certifications: []
+note: >-
+  Resistant AI operates a public Trust Center at https://trust.resistant.ai/, linked from the
+  homepage. The page renders its certification/compliance list client-side (returns a "Loading..."
+  shell to an unauthenticated fetch), so specific named certifications could not be captured
+  verbatim and are intentionally left empty rather than fabricated. The Trust Center URL itself is
+  verified to exist.

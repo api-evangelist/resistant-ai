@@ -1,0 +1,68 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/resistant-ai-documents-openapi.json, openapi/resistant-ai-tenant-management-openapi.json
+note: No official hosted/remote MCP server was found for Resistant AI. This is a DERIVED candidate
+  tool list mapping one MCP tool per OpenAPI operation, as a starting point for an agent integration.
+server:
+  name: resistant-ai
+  transport: http
+  url: null
+tools:
+- name: create_submission
+  description: Create a document analysis submission (returns submission_id + presigned upload_url).
+  source_operation: openapi/resistant-ai-documents-openapi.json#createSubmission
+- name: add_submission_characteristics
+  description: Attach submission characteristics to a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#putSubmissionCharacteristics
+- name: get_fraud
+  description: Fetch the fraud analysis result for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getFraud
+- name: get_content
+  description: Fetch extracted content (limited) for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getContent
+- name: get_quality
+  description: Fetch the document quality result for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getQuality
+- name: get_decision
+  description: Fetch the Adaptive Decision result for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getDecision
+- name: get_classification
+  description: Fetch the document classification for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getClassification
+- name: get_report
+  description: Fetch the PDF report (preview) for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getReport
+- name: delete_submission
+  description: Delete a submission and its results.
+  source_operation: openapi/resistant-ai-documents-openapi.json#deleteSubmission
+- name: put_feedback
+  description: Add analysis feedback for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#putFeedback
+- name: get_feedback
+  description: Get analysis feedback for a submission.
+  source_operation: openapi/resistant-ai-documents-openapi.json#getFeedback
+- name: create_tenant
+  description: Create a tenant (Tenant Management API).
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#createTenant
+- name: list_tenants
+  description: List tenants.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#getTenants
+- name: get_tenant
+  description: Get a tenant by id.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#getTenant
+- name: delete_tenant
+  description: Delete a tenant.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#deleteTenant
+- name: list_tenant_applications
+  description: List applications for a tenant.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#getTenantApplications
+- name: create_tenant_application
+  description: Create an application under a tenant.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#createTenantApplication
+- name: get_tenant_application
+  description: Get an application under a tenant.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#getTenantApplication
+- name: delete_tenant_application
+  description: Delete an application under a tenant.
+  source_operation: openapi/resistant-ai-tenant-management-openapi.json#deleteTenantApplication

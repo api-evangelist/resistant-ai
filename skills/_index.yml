@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/resistant-ai-documents-openapi.json, openapi/resistant-ai-tenant-management-openapi.json
+skills:
+- file: resistant-ai-analyze-document-for-fraud.md
+  name: Analyze a document for fraud
+  api: openapi/resistant-ai-documents-openapi.json
+  operations: [createSubmission, getFraud]
+- file: resistant-ai-adaptive-decision-with-webhooks.md
+  name: Run Adaptive Decision with webhook notification
+  api: openapi/resistant-ai-documents-openapi.json
+  operations: [createSubmission, getDecision]
+- file: resistant-ai-provision-tenant-and-application.md
+  name: Provision a tenant and application
+  api: openapi/resistant-ai-tenant-management-openapi.json
+  operations: [createTenant, createTenantApplication, getTenantApplications]
