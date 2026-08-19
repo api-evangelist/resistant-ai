@@ -1,0 +1,338 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Resistant Documents Submission API",
+    "version": "2.0.0b"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{environment}.resistant.ai/v2/submission",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new submission for a document to be analyzed"
+        },
+        {
+          "info": {
+            "name": "Add submission characteristics",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/characteristics",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Attach submission characteristics to the submission. Submission characteristics are properties associated with the <i>original</i> submission of the document (i.e., from the end user).\nIn descriptions of the properties, \"user\" refers to the person who initially submitted the document, \"customer\" refers to a customer of Resistant.ai using this API.\n\nCalling this endpoint is only allowed if `enable_submission_characteristics` is set to `true` when creating the submission. When submission character"
+        },
+        {
+          "info": {
+            "name": "Fetch fraud result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/fraud",
+            "params": [
+              {
+                "name": "with_metadata",
+                "value": "",
+                "type": "query",
+                "description": "Enables indicator medatadata in the response object"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Fetch fraud analysis result"
+        },
+        {
+          "info": {
+            "name": "Fetch content result [limited]",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/content",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Fetch content extraction result"
+        },
+        {
+          "info": {
+            "name": "Fetch quality result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/quality",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Fetch quality result"
+        },
+        {
+          "info": {
+            "name": "Fetch Adaptive Decision result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/decision",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "fraud",
+                "type": "query",
+                "description": "Comma-separated list of `decision_inputs` that should include the full data in its `data` attribute, e.g. `?embed=fraud`."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Fetch Adaptive Decision result"
+        },
+        {
+          "info": {
+            "name": "Fetch document classification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/classification",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Fetch classification of the type of the submitted document"
+        },
+        {
+          "info": {
+            "name": "Fetch report [preview]",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/report",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_decision",
+                "value": "",
+                "type": "query",
+                "description": "Include Adaptive Decision result in report"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Fetch fraud analysis report of the submitted document"
+        },
+        {
+          "info": {
+            "name": "Delete submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Permanently deletes the submission. Can be used, e.g., to remove a document before the configured retention period."
+        },
+        {
+          "info": {
+            "name": "Get analysis feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/feedback",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get custom feedback for the document analysis result previously stored with a PUT request to this endpoint."
+        },
+        {
+          "info": {
+            "name": "Add analysis feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{environment}.resistant.ai/v2/submission/:submission_id/feedback",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add custom feedback for the document analysis result. \n\nAll custom feedback provided for a document must be reviewed by the customer before submission to ensure it does not contain any Personally Identifiable Information (PII). Submitted feedback will be securely stored indefinitely to support ongoing product improvements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

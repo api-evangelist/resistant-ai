@@ -2,8 +2,8 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/resistant-ai-documents-openapi.json, openapi/resistant-ai-tenant-management-openapi.json
-note: No official hosted/remote MCP server was found for Resistant AI. This is a DERIVED candidate
-  tool list mapping one MCP tool per OpenAPI operation, as a starting point for an agent integration.
+note: No official hosted/remote MCP server was found for Resistant AI. This is a DERIVED candidate tool
+  list mapping one MCP tool per OpenAPI operation, as a starting point for an agent integration.
 server:
   name: resistant-ai
   transport: http
@@ -66,3 +66,9 @@ tools:
 - name: delete_tenant_application
   description: Delete an application under a tenant.
   source_operation: openapi/resistant-ai-tenant-management-openapi.json#deleteTenantApplication
+deployment:
+  mode: none
+  verified: derived
+  tools: 19
+  checked: '2026-08-12'
+  source: catalog MCP census
