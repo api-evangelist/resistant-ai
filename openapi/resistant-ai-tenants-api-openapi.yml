@@ -1,46 +1,26 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Resistant Documents Submission Tenants API
-  version: 2.0.0b
-  description: '
-
-    Resistant Documents provides this API to programmatically interact with its document analysis engine.
+  title: Resistant Documents organization API - prod Tenants API
+  version: 0.0.1
+  description: 'Resistant Documents provides this API to programmatically interact with its organization tenant management.
 
     Interaction with the API can be divided into three phases:
 
 
-    1. Creating document submission
+    1. organization access provisioning and its configuration. This is managed by the Resistant AI team and credentials for API access are provided.
 
-    2. Uploading a file for for analysis to an address returned from step 1.
+    2. Managing tenants within organization - creation, deletion and listing.
 
-    3. Fetching analysis results
-
-
-    In the first step, the submission is created by posting to the  `/v2/submission` endpoint. The response contains a `submission_id` uniquely identifying the document to be analyzed throughout the entire interaction, and is used to fetch analysis results later.
-
-
-    Submission response also returns `upload_url` containing a pre-signed URL. This URL should be used to upload the actual document to be analyzed in the second step. Please note the document has to be uploaded using HTTP `PUT` method with `Content-Type` HTTP header set to `application/octet-stream`.
-
-
-    In the last step, client should repeatedly poll using the `/v2/submission/{submission_id}/fraud` endpoint for analysis results. The best practice is to use polling with an [exponential back-off](https://en.wikipedia.org/wiki/Exponential_backoff) to reduce load on the API.
-
-
-    # Authentication
-
-
-    <SecurityDefinitions />'
+    3. Configuration of an api access for provisioned tenant.'
 servers:
-- url: https://{environment}.resistant.ai
+- url: https://{environment}.resistant.ai/v0
+  description: Tenant Management API
   variables:
     environment:
-      default: api.documents
+      default: api.tenants
       enum:
-      - api.documents
-      - api.us-1.documents
-      - api.ca-1.documents
-      - api.ap-2.documents
-      - api.ap-3.documents
-      - api.documents.testing
+      - api.tenants
+      - api.tenants.testing
 tags:
 - name: Tenants
 paths:
@@ -345,9 +325,42 @@ paths:
       tags:
       - Tenants
 components:
+  responses:
+    Forbidden:
+      description: Access to the requested resource is forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing valid authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnsupportedMediaType:
+      description: Unsupported media type.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Request quota was exceeded
   schemas:
-    RSAAuthentication:
-      title: RSAAuthentication
+    ECCredentials:
+      title: ECCredentials
       type: object
       properties:
         type:
@@ -358,39 +371,15 @@ components:
           type: string
           description: Signing algorithm
           enum:
-          - RS256
+          - ES256
         kid:
           title: Kid
           type: string
           description: The unique identifier of the key.
-        e:
-          title: e
-          type: integer
-          description: The key exponent of a RSA key.
-          enum:
-          - 65537
-        n:
-          title: n
-          type: integer
-          description: The modulus of the RSA key. Key size needs to be bigger then 2048 bits
       required:
       - type
       - alg
       - kid
-      - e
-      - n
-    Error:
-      title: Error
-      type: object
-      properties:
-        message:
-          title: Error message
-          description: Detailed error message
-          minLength: 0
-          maxLength: 512
-          type: string
-      required:
-      - message
     TenantApplicationResponse:
       title: TenantApplicationResponse
       type: object
@@ -426,77 +415,18 @@ components:
       - scopes
       - client_id
       - auth_server
-    ECCredentials:
-      title: ECCredentials
+    Error:
+      title: Error
       type: object
       properties:
-        type:
-          title: Type
+        message:
+          title: Error message
+          description: Detailed error message
+          minLength: 0
+          maxLength: 512
           type: string
-        alg:
-          title: Alg
-          type: string
-          description: Signing algorithm
-          enum:
-          - ES256
-        kid:
-          title: Kid
-          type: string
-          description: The unique identifier of the key.
       required:
-      - type
-      - alg
-      - kid
-    TenantApplicationCreateRequest:
-      title: TenantApplicationCreateRequest
-      type: object
-      properties:
-        cell:
-          $ref: '#/components/schemas/CellName'
-        scopes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentsScope'
-        auth_method:
-          $ref: '#/components/schemas/Authentication'
-      required:
-      - cell
-      - scopes
-      - auth_method
-    Credentials:
-      title: Credentials
-      description: Credentials are returned only once for newly created applications
-      discriminator:
-        propertyName: type
-        mapping:
-          RSA: '#/components/schemas/RSACredentials'
-          EC: '#/components/schemas/ECCredentials'
-          CLIENT_SECRET: '#/components/schemas/ClientSecretCredentials'
-      oneOf:
-      - $ref: '#/components/schemas/RSACredentials'
-      - $ref: '#/components/schemas/ECCredentials'
-      - $ref: '#/components/schemas/ClientSecretCredentials'
-    ClientSecretCredentials:
-      title: ClientSecretCredentials
-      type: object
-      properties:
-        type:
-          title: Type
-          type: string
-        client_secret:
-          title: Client Secret
-          type: string
-          description: Client credentials secret
-      required:
-      - type
-      - client_secret
-    DocumentsScope:
-      title: DocumentsScope
-      description: An enumeration.
-      enum:
-      - documents.submissions.read
-      - documents.submissions.write
-      type: string
+      - message
     TenantCreateRequest:
       title: TenantCreateRequest
       type: object
@@ -517,36 +447,34 @@ components:
             $ref: '#/components/schemas/CellName'
       required:
       - name
-    TenantApplicationListResponse:
-      title: TenantApplicationListResponse
+    DocumentsScope:
+      title: DocumentsScope
+      description: An enumeration.
+      enum:
+      - documents.submissions.read
+      - documents.submissions.write
+      type: string
+    RSACredentials:
+      title: RSACredentials
       type: object
       properties:
-        items:
-          title: Items
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantApplicationResponse'
+        type:
+          title: Type
+          type: string
+        alg:
+          title: Alg
+          type: string
+          description: Signing algorithm
+          enum:
+          - RS256
+        kid:
+          title: Kid
+          type: string
+          description: The unique identifier of the key.
       required:
-      - items
-    TenantPageResponse:
-      title: TenantPageResponse
-      type: object
-      properties:
-        items:
-          title: Items
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantResponse'
-        _links:
-          title: Links
-          type: object
-          additionalProperties: true
-          example:
-            next:
-              href: /tenants?limit={limit}&after_id={after_id}
-      required:
-      - items
-      - _links
+      - type
+      - alg
+      - kid
     ClientSecretAuthentication:
       title: ClientSecretAuthentication
       type: object
@@ -556,6 +484,16 @@ components:
           type: string
       required:
       - type
+    CellName:
+      title: CellName
+      description: An enumeration.
+      enum:
+      - eu-1
+      - us-1
+      - ap-2
+      - ap-3
+      - ca-1
+      type: string
     TenantResponse:
       title: TenantResponse
       type: object
@@ -599,49 +537,50 @@ components:
       - created
       - updated
       - cells
-    RSACredentials:
-      title: RSACredentials
+    TenantPageResponse:
+      title: TenantPageResponse
+      type: object
+      properties:
+        items:
+          title: Items
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantResponse'
+        _links:
+          title: Links
+          type: object
+          additionalProperties: true
+          example:
+            next:
+              href: /tenants?limit={limit}&after_id={after_id}
+      required:
+      - items
+      - _links
+    ClientSecretCredentials:
+      title: ClientSecretCredentials
       type: object
       properties:
         type:
           title: Type
           type: string
-        alg:
-          title: Alg
+        client_secret:
+          title: Client Secret
           type: string
-          description: Signing algorithm
-          enum:
-          - RS256
-        kid:
-          title: Kid
-          type: string
-          description: The unique identifier of the key.
+          description: Client credentials secret
       required:
       - type
-      - alg
-      - kid
-    Authentication:
-      title: Authentication
-      discriminator:
-        propertyName: type
-        mapping:
-          RSA: '#/components/schemas/RSAAuthentication'
-          EC: '#/components/schemas/ECAuthentication'
-          CLIENT_SECRET: '#/components/schemas/ClientSecretAuthentication'
-      oneOf:
-      - $ref: '#/components/schemas/RSAAuthentication'
-      - $ref: '#/components/schemas/ECAuthentication'
-      - $ref: '#/components/schemas/ClientSecretAuthentication'
-    CellName:
-      title: CellName
-      description: An enumeration.
-      enum:
-      - eu-1
-      - us-1
-      - ap-2
-      - ap-3
-      - ca-1
-      type: string
+      - client_secret
+    TenantApplicationListResponse:
+      title: TenantApplicationListResponse
+      type: object
+      properties:
+        items:
+          title: Items
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantApplicationResponse'
+      required:
+      - items
     ECAuthentication:
       title: ECAuthentication
       type: object
@@ -673,45 +612,90 @@ components:
       - kid
       - x
       - y
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnsupportedMediaType:
-      description: Unsupported media type.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Access to the requested resource is forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing valid authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Request quota was exceeded
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Authentication:
+      title: Authentication
+      discriminator:
+        propertyName: type
+        mapping:
+          RSA: '#/components/schemas/RSAAuthentication'
+          EC: '#/components/schemas/ECAuthentication'
+          CLIENT_SECRET: '#/components/schemas/ClientSecretAuthentication'
+      oneOf:
+      - $ref: '#/components/schemas/RSAAuthentication'
+      - $ref: '#/components/schemas/ECAuthentication'
+      - $ref: '#/components/schemas/ClientSecretAuthentication'
+    RSAAuthentication:
+      title: RSAAuthentication
+      type: object
+      properties:
+        type:
+          title: Type
+          type: string
+        alg:
+          title: Alg
+          type: string
+          description: Signing algorithm
+          enum:
+          - RS256
+        kid:
+          title: Kid
+          type: string
+          description: The unique identifier of the key.
+        e:
+          title: e
+          type: integer
+          description: The key exponent of a RSA key.
+          enum:
+          - 65537
+        n:
+          title: n
+          type: integer
+          description: The modulus of the RSA key. Key size needs to be bigger then 2048 bits
+      required:
+      - type
+      - alg
+      - kid
+      - e
+      - n
+    Credentials:
+      title: Credentials
+      description: Credentials are returned only once for newly created applications
+      discriminator:
+        propertyName: type
+        mapping:
+          RSA: '#/components/schemas/RSACredentials'
+          EC: '#/components/schemas/ECCredentials'
+          CLIENT_SECRET: '#/components/schemas/ClientSecretCredentials'
+      oneOf:
+      - $ref: '#/components/schemas/RSACredentials'
+      - $ref: '#/components/schemas/ECCredentials'
+      - $ref: '#/components/schemas/ClientSecretCredentials'
+    TenantApplicationCreateRequest:
+      title: TenantApplicationCreateRequest
+      type: object
+      properties:
+        cell:
+          $ref: '#/components/schemas/CellName'
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentsScope'
+        auth_method:
+          $ref: '#/components/schemas/Authentication'
+      required:
+      - cell
+      - scopes
+      - auth_method
   securitySchemes:
     OAuth2:
       type: oauth2
+      description: "[JWT with private key](https://developer.okta.com/docs/api/openapi/okta-oauth/guides/client-auth/#jwt-with-private-key).\n[Java example](https://developer.okta.com/docs/guides/build-self-signed-jwt/java/main/#build-a-jwt-with-a-private-key)\n Please note that Token URL is specific for a given environment. Correct URL is in the corresponding environment documentation.\n"
       flows:
         clientCredentials:
-          tokenUrl: https://eu.id.resistant.ai/oauth2/aus2un1hkrKhPjir4417/v1/token
+          tokenUrl: https://eu.id.resistant.ai/oauth2/aus17c172cLOCWEyk417/v1/token
           scopes:
-            submissions.read: Read analysis results for a submission
-            submissions.write: Create a new submission
+            tenants.read: Read tenant configurations within the organization
+            tenants.write: Manage and configure tenants within the organization
+            tenants.applications.read: Read tenant applications
+            tenants.applications.write: Manage tenant applications
+            organization.read: Read organization configuration

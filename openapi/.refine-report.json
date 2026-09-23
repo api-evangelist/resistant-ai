@@ -1,8 +1,8 @@
 {
   "provider": "resistant-ai",
   "sources": [
-    "resistant-ai-submission-api-openapi.yml",
-    "resistant-ai-tenants-api-openapi.yml"
+    "_original/resistant-ai-documents-openapi.json",
+    "_original/resistant-ai-tenant-management-openapi.json"
   ],
   "outputs": [
     "resistant-ai-submission-api-openapi.yml",
@@ -11,6 +11,35 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "resistant-ai-documents-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "resistant-ai-documents-openapi.json: tagged paths POST /v2/submission -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths PUT /v2/submission/{submission_id}/characteristics -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/fraud -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/content -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/quality -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/decision -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/classification -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/report -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths DELETE /v2/submission/{submission_id} -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths PUT /v2/submission/{submission_id}/feedback -> Submission",
+    "resistant-ai-documents-openapi.json: tagged paths GET /v2/submission/{submission_id}/feedback -> Submission",
+    "resistant-ai-documents-openapi.json: declared missing tag: Submission",
+    "resistant-ai-tenant-management-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "resistant-ai-tenant-management-openapi.json: tagged paths POST /tenants -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths GET /tenants -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths GET /tenants/{tenant_id} -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths DELETE /tenants/{tenant_id} -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths GET /tenants/{tenant_id}/applications -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths POST /tenants/{tenant_id}/applications -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths GET /tenants/{tenant_id}/applications/{application_id} -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: tagged paths DELETE /tenants/{tenant_id}/applications/{application_id} -> Tenants",
+    "resistant-ai-tenant-management-openapi.json: declared missing tag: Tenants",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "resistant-ai-submission-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "resistant-ai-tenants-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
