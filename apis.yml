@@ -52,14 +52,14 @@ modified: '2026-07-20'
 tags:
 - Company
 - Artificial Intelligence
-- Fraud Detection
+- Fraud Prevention
 - Financial Crime
 - Document Verification
 - Document Forensics
 - AML
 - Identity Verification
 - Fintech
-- Machine-Learning
+- Machine Learning
 tags_raw:
 - Company
 - Ai
@@ -71,6 +71,7 @@ tags_raw:
 - Identity Verification
 - Fintech
 - Machine Learning
+- Machine-Learning
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
