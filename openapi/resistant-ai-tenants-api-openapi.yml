@@ -326,26 +326,72 @@ paths:
       - Tenants
 components:
   schemas:
-    TenantCreateRequest:
-      title: TenantCreateRequest
+    ECAuthentication:
+      title: ECAuthentication
       type: object
       properties:
-        name:
-          title: Name
+        type:
+          title: Type
           type: string
-          description: Desired name of the tenant. Must be unique within the organization and contain only lowercase letters (a-z) and digits (0-9).
-          minLength: 1
-          maxLength: 61
-          pattern: ^[a-z0-9]{1,61}$
-        cells:
-          default:
-          - eu-1
-          description: List of cells where the UI should be accessible
+        alg:
+          title: Alg
+          type: string
+          description: Signing algorithm
+          enum:
+          - ES256
+        kid:
+          title: Kid
+          type: string
+          description: The unique identifier of the key.
+        x:
+          title: x
+          type: integer
+          description: The public x coordinate for the elliptic curve point.
+        y:
+          title: y
+          type: integer
+          description: The public y coordinate for the elliptic curve point.
+      required:
+      - type
+      - alg
+      - kid
+      - x
+      - y
+    TenantApplicationResponse:
+      title: TenantApplicationResponse
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        client_id:
+          title: Client Id
+          type: string
+        auth_server:
+          title: Auth_server
+          type: string
+          description: Auth server url
+        cell:
+          $ref: '#/components/schemas/CellName'
+        scopes:
           type: array
           items:
-            $ref: '#/components/schemas/CellName'
+            $ref: '#/components/schemas/DocumentsScope'
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        _links:
+          title: Links
+          type: object
+          properties:
+            token_url:
+              type: string
+          additionalProperties: true
       required:
-      - name
+      - id
+      - cell
+      - scopes
+      - client_id
+      - auth_server
     ClientSecretAuthentication:
       title: ClientSecretAuthentication
       type: object
@@ -355,22 +401,39 @@ components:
           type: string
       required:
       - type
-    TenantApplicationCreateRequest:
-      title: TenantApplicationCreateRequest
+    Authentication:
+      title: Authentication
+      discriminator:
+        propertyName: type
+        mapping:
+          RSA: '#/components/schemas/RSAAuthentication'
+          EC: '#/components/schemas/ECAuthentication'
+          CLIENT_SECRET: '#/components/schemas/ClientSecretAuthentication'
+      oneOf:
+      - $ref: '#/components/schemas/RSAAuthentication'
+      - $ref: '#/components/schemas/ECAuthentication'
+      - $ref: '#/components/schemas/ClientSecretAuthentication'
+    RSACredentials:
+      title: RSACredentials
       type: object
       properties:
-        cell:
-          $ref: '#/components/schemas/CellName'
-        scopes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentsScope'
-        auth_method:
-          $ref: '#/components/schemas/Authentication'
+        type:
+          title: Type
+          type: string
+        alg:
+          title: Alg
+          type: string
+          description: Signing algorithm
+          enum:
+          - RS256
+        kid:
+          title: Kid
+          type: string
+          description: The unique identifier of the key.
       required:
-      - cell
-      - scopes
-      - auth_method
+      - type
+      - alg
+      - kid
     RSAAuthentication:
       title: RSAAuthentication
       type: object
@@ -404,82 +467,38 @@ components:
       - kid
       - e
       - n
-    Error:
-      title: Error
-      type: object
-      properties:
-        message:
-          title: Error message
-          description: Detailed error message
-          minLength: 0
-          maxLength: 512
-          type: string
-      required:
-      - message
-    CellName:
-      title: CellName
-      description: An enumeration.
-      enum:
-      - eu-1
-      - us-1
-      - ap-2
-      - ap-3
-      - ca-1
-      type: string
-    ECAuthentication:
-      title: ECAuthentication
-      type: object
-      properties:
-        type:
-          title: Type
-          type: string
-        alg:
-          title: Alg
-          type: string
-          description: Signing algorithm
-          enum:
-          - ES256
-        kid:
-          title: Kid
-          type: string
-          description: The unique identifier of the key.
-        x:
-          title: x
-          type: integer
-          description: The public x coordinate for the elliptic curve point.
-        y:
-          title: y
-          type: integer
-          description: The public y coordinate for the elliptic curve point.
-      required:
-      - type
-      - alg
-      - kid
-      - x
-      - y
-    TenantApplicationListResponse:
-      title: TenantApplicationListResponse
+    TenantPageResponse:
+      title: TenantPageResponse
       type: object
       properties:
         items:
           title: Items
           type: array
           items:
-            $ref: '#/components/schemas/TenantApplicationResponse'
+            $ref: '#/components/schemas/TenantResponse'
+        _links:
+          title: Links
+          type: object
+          additionalProperties: true
+          example:
+            next:
+              href: /tenants?limit={limit}&after_id={after_id}
       required:
       - items
-    Authentication:
-      title: Authentication
+      - _links
+    Credentials:
+      title: Credentials
+      description: Credentials are returned only once for newly created applications
       discriminator:
         propertyName: type
         mapping:
-          RSA: '#/components/schemas/RSAAuthentication'
-          EC: '#/components/schemas/ECAuthentication'
-          CLIENT_SECRET: '#/components/schemas/ClientSecretAuthentication'
+          RSA: '#/components/schemas/RSACredentials'
+          EC: '#/components/schemas/ECCredentials'
+          CLIENT_SECRET: '#/components/schemas/ClientSecretCredentials'
       oneOf:
-      - $ref: '#/components/schemas/RSAAuthentication'
-      - $ref: '#/components/schemas/ECAuthentication'
-      - $ref: '#/components/schemas/ClientSecretAuthentication'
+      - $ref: '#/components/schemas/RSACredentials'
+      - $ref: '#/components/schemas/ECCredentials'
+      - $ref: '#/components/schemas/ClientSecretCredentials'
     TenantResponse:
       title: TenantResponse
       type: object
@@ -523,33 +542,6 @@ components:
       - created
       - updated
       - cells
-    Credentials:
-      title: Credentials
-      description: Credentials are returned only once for newly created applications
-      discriminator:
-        propertyName: type
-        mapping:
-          RSA: '#/components/schemas/RSACredentials'
-          EC: '#/components/schemas/ECCredentials'
-          CLIENT_SECRET: '#/components/schemas/ClientSecretCredentials'
-      oneOf:
-      - $ref: '#/components/schemas/RSACredentials'
-      - $ref: '#/components/schemas/ECCredentials'
-      - $ref: '#/components/schemas/ClientSecretCredentials'
-    ClientSecretCredentials:
-      title: ClientSecretCredentials
-      type: object
-      properties:
-        type:
-          title: Type
-          type: string
-        client_secret:
-          title: Client Secret
-          type: string
-          description: Client credentials secret
-      required:
-      - type
-      - client_secret
     ECCredentials:
       title: ECCredentials
       type: object
@@ -571,25 +563,32 @@ components:
       - type
       - alg
       - kid
-    TenantPageResponse:
-      title: TenantPageResponse
+    TenantApplicationCreateRequest:
+      title: TenantApplicationCreateRequest
       type: object
       properties:
-        items:
-          title: Items
+        cell:
+          $ref: '#/components/schemas/CellName'
+        scopes:
           type: array
           items:
-            $ref: '#/components/schemas/TenantResponse'
-        _links:
-          title: Links
-          type: object
-          additionalProperties: true
-          example:
-            next:
-              href: /tenants?limit={limit}&after_id={after_id}
+            $ref: '#/components/schemas/DocumentsScope'
+        auth_method:
+          $ref: '#/components/schemas/Authentication'
       required:
-      - items
-      - _links
+      - cell
+      - scopes
+      - auth_method
+    CellName:
+      title: CellName
+      description: An enumeration.
+      enum:
+      - eu-1
+      - us-1
+      - ap-2
+      - ap-3
+      - ca-1
+      type: string
     DocumentsScope:
       title: DocumentsScope
       description: An enumeration.
@@ -597,79 +596,66 @@ components:
       - documents.submissions.read
       - documents.submissions.write
       type: string
-    RSACredentials:
-      title: RSACredentials
+    TenantApplicationListResponse:
+      title: TenantApplicationListResponse
+      type: object
+      properties:
+        items:
+          title: Items
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantApplicationResponse'
+      required:
+      - items
+    TenantCreateRequest:
+      title: TenantCreateRequest
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Desired name of the tenant. Must be unique within the organization and contain only lowercase letters (a-z) and digits (0-9).
+          minLength: 1
+          maxLength: 61
+          pattern: ^[a-z0-9]{1,61}$
+        cells:
+          default:
+          - eu-1
+          description: List of cells where the UI should be accessible
+          type: array
+          items:
+            $ref: '#/components/schemas/CellName'
+      required:
+      - name
+    Error:
+      title: Error
+      type: object
+      properties:
+        message:
+          title: Error message
+          description: Detailed error message
+          minLength: 0
+          maxLength: 512
+          type: string
+      required:
+      - message
+    ClientSecretCredentials:
+      title: ClientSecretCredentials
       type: object
       properties:
         type:
           title: Type
           type: string
-        alg:
-          title: Alg
+        client_secret:
+          title: Client Secret
           type: string
-          description: Signing algorithm
-          enum:
-          - RS256
-        kid:
-          title: Kid
-          type: string
-          description: The unique identifier of the key.
+          description: Client credentials secret
       required:
       - type
-      - alg
-      - kid
-    TenantApplicationResponse:
-      title: TenantApplicationResponse
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-        client_id:
-          title: Client Id
-          type: string
-        auth_server:
-          title: Auth_server
-          type: string
-          description: Auth server url
-        cell:
-          $ref: '#/components/schemas/CellName'
-        scopes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentsScope'
-        credentials:
-          $ref: '#/components/schemas/Credentials'
-        _links:
-          title: Links
-          type: object
-          properties:
-            token_url:
-              type: string
-          additionalProperties: true
-      required:
-      - id
-      - cell
-      - scopes
-      - client_id
-      - auth_server
+      - client_secret
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Request quota was exceeded
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing valid authentication credentials.
+    Forbidden:
+      description: Access to the requested resource is forbidden.
       content:
         application/json:
           schema:
@@ -680,12 +666,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Access to the requested resource is forbidden.
+    Unauthorized:
+      description: Missing valid authentication credentials.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Request quota was exceeded
   securitySchemes:
     OAuth2:
       type: oauth2
