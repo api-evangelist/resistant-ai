@@ -99,6 +99,9 @@ apis:
   - type: OpenAPI
     url: openapi/resistant-ai-tenants-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/resistant-ai-capability-edges.yml
+  name: Resistant AI Business Capability Map
 - type: Overlay
   url: overlays/resistant-ai-documents-overlay.yaml
 - type: Website
