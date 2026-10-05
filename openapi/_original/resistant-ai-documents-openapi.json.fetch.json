@@ -1,0 +1,12 @@
+{
+ "url": "https://developers.resistant.ai/openapi.json",
+ "requested_url": "https://developers.resistant.ai/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 139234,
+ "sha256": "7c1ce5331e7bfac694c44dcfb5d576e58b6d65c941c3ac4116e7046b358f8aa5",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
