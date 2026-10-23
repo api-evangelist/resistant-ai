@@ -3333,3 +3333,9 @@ components:
           scopes:
             submissions.read: Read analysis results for a submission
             submissions.write: Create a new submission
+x-provenance:
+  method: harvested
+  publisher: Resistant AI
+  source: https://developers.resistant.ai/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
