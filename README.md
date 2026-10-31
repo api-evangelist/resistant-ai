@@ -64,6 +64,140 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Resistant AI is a company surfaced as a portfolio company of gv, index-ventures, seedcamp and added to the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment pipeline.
+Resistant AI protects financial-services organizations from fraud and financial crime with AI. Its Documents product detects fake, tampered, forged, and AI-generated documents (PDFs and images) in seconds, and its Transactions product layers 80+ AI models over existing transaction-monitoring systems for AML and fraud detection. The Resistant Documents API provides programmatic document forensics — fraud, quality, classification, content extraction, and Adaptive Decision — through an OAuth2 create/upload/poll workflow across regional cells, with polling, Amazon SQS, and Svix webhook result delivery, plus a Tenant Management API for provisioning tenants and applications.
 
-Backed by: gv, index-ventures, seedcamp — http://resistant.ai
+**Areas:** Company · Artificial Intelligence · Fraud Prevention · Financial Crime · Document Verification · Document Forensics · AML · Identity Verification · Fintech · Machine Learning
+
+## Resistant AI on APIs.io
+
+Everything profiled for Resistant AI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/resistant-ai/](https://apis.io/providers/resistant-ai/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Resistant AI Submission API](https://apis.io/apis/resistant-ai/resistant-ai-submission-api/) — The Submission API from Resistant AI — 10 operation(s) for submission.
+- [Resistant AI Tenants API](https://apis.io/apis/resistant-ai/resistant-ai-tenants-api/) — The Tenants API from Resistant AI — 4 operation(s) for tenants.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Resistant Ai Documents Webhooks](https://apis.io/asyncapis/resistant-ai/resistant-ai-documents-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [resistant-ai](https://apis.io/servers/resistant-ai/resistant-ai/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Resistant Ai Agentic Access](https://apis.io/agentic-access/resistant-ai/resistant-ai-agentic-access/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Resistant Documents Submission API](https://apis.io/collections/resistant-ai/open-resistant-ai-submission-api/)
+- [Resistant Documents Submission Tenants API](https://apis.io/collections/resistant-ai/open-resistant-ai-tenants-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Resistant Ai Documents Overlay](https://apis.io/overlays/resistant-ai/resistant-ai-documents-overlay/)
+- [Resistant Ai Tenant Management Overlay](https://apis.io/overlays/resistant-ai/resistant-ai-tenant-management-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Resistant Ai Authentication](https://apis.io/security/resistant-ai/resistant-ai-authentication/)
+- [Resistant Ai Domain Security](https://apis.io/security/resistant-ai/resistant-ai-domain-security/)
+- [Resistant Ai Trust Center](https://apis.io/security/resistant-ai/resistant-ai-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Resistant Ai Scopes](https://apis.io/scopes/resistant-ai/resistant-ai-scopes/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Resistant Ai Rate Limits](https://apis.io/rate-limits/resistant-ai/resistant-ai-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://resistant.ai)
+- [Documentation](https://developers.resistant.ai)
+- [Getting started](https://developers.resistant.ai/getting-started/about)
+- [API reference](https://developers.resistant.ai/api-reference)
+- [Support](https://developers.resistant.ai/support/contact-support)
+- [Blog](https://resistant.ai/blog)
+- [Trust centre](https://trust.resistant.ai/)
+- [Privacy policy](https://resistant.ai/privacy-policy)
+- [Status](https://resistantai.statuspage.io/)
+
+## API Evangelist rating
+
+**Kin Score 41.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 57.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 10.5 |
+
+**Agent readiness 47.1** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 28.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/resistant-ai/](https://apis.io/providers/resistant-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Resistant AI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/resistant-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
